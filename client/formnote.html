@@ -4,11 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Markdown</title>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./note.css" />
   </head>
   <body>
     <div>
-      <h1>Markdown data</h1>
+      <h1>Markdown file</h1>
+      <a href="/notes">View all notes</a>
+      <hr />
       <div>
         <input id="fileIn" type="file" />
         <button id="submit" type="button">Save Note</button>
@@ -17,7 +19,7 @@
       <div class="data">
         <div id="left" class="left"></div>
         <div id="right" class="right">
-          <ul id="menu">
+          <ul class="menu">
             <li id="html" class="active">
               <a href="">HTML</a>
             </li>
@@ -30,6 +32,6 @@
         </div>
       </div>
     </div>
-    <script src="./script.js"></script>
+    <script src="./note.js"></script>
   </body>
 </html>

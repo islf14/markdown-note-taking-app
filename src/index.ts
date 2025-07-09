@@ -1,19 +1,21 @@
 import express, { json } from 'express'
 import noteRouter from './routes/note.route'
+import 'dotenv/config'
 
 const app = express()
-const port = 3000
+const port = process.env.PORT ?? 3000
 app.use(json())
 app.use(express.static('client'))
 
 app.get('/', (_req, res) => {
-  res.send('Welcome to the Markdown Note-taking App!')
+  res.json('Welcome to the Markdown Note-taking App!')
 })
-
 app.use('/note', (_req, res) => {
-  res.sendFile(process.cwd() + '/client/index.html')
+  res.sendFile(process.cwd() + '/client/formnote.html')
 })
-
+app.use('/notes', (_req, res) => {
+  res.sendFile(process.cwd() + '/client/getallnotes.html')
+})
 app.use('/api/note', noteRouter)
 
 app.listen(port, () => {
