@@ -12,7 +12,6 @@ export class NoteController {
     const data = req.body.note
     const md = markdownit()
     const result = md.render(data)
-
     res.json({ data: result })
   }
 
@@ -55,5 +54,28 @@ export class NoteController {
       console.error({ error: e.message })
       res.status(500).json({ error: 'Error getting notes' })
     }
+  }
+
+  public async viewNote(req: any, res: any) {
+    const { id } = req.params
+    const md = markdownit()
+    let note = null
+    try {
+      note = await NoteModel.viewNote({ id })
+    } catch (e: any) {
+      console.error({ error: e.message })
+      return res.status(400).json({ error: 'Error getting note' })
+    }
+    if (note && note.content) {
+      const content = JSON.parse(note.content)
+      const result = md.render(content)
+      const data = {
+        name: note.name,
+        noteOriginal: content,
+        noteConverted: result,
+        createdAt: note.createdAt
+      }
+      return res.status(200).json(data)
+    } else return res.status(400).json({ error: 'Error getting note' })
   }
 }

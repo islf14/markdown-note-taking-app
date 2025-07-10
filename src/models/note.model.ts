@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb'
 import { connection } from './connection'
 
 async function connect() {
@@ -39,5 +40,11 @@ export class NoteModel {
     const db = await connect()
     const allNotes = await db.find().toArray()
     return allNotes
+  }
+
+  static async viewNote({ id }: { id: string }) {
+    const db = await connect()
+    const note = await db.findOne({ _id: new ObjectId(id) })
+    return note
   }
 }

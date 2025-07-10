@@ -3,18 +3,29 @@ window.onload = function () {
 }
 
 function getAll() {
-  const data = fetch('api/note/allnotes')
+  fetch('api/note')
     .then((response) => {
-      console.log(response)
       if (!response.ok) {
         throw new Error('Network response was not ok')
       }
       return response.json()
     })
     .then((data) => {
-      console.log(data)
+      let i = 0
       data.forEach((element) => {
-        console.log(element.name)
+        i++
+        const table = document.querySelector('#notesTable')
+        const newRow = table.insertRow(-1)
+        const cellZero = newRow.insertCell(0)
+        const cellOne = newRow.insertCell(1)
+        const cellTwo = newRow.insertCell(2)
+        const a = document.createElement('a')
+        a.setAttribute('href', `view/${element._id}`)
+        a.textContent = 'View note'
+
+        cellZero.appendChild(document.createTextNode(i))
+        cellOne.appendChild(document.createTextNode(element.name))
+        cellTwo.appendChild(a)
       })
     })
     .catch((error) => {

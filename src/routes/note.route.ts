@@ -6,7 +6,8 @@ const noteRouter = Router()
 const noteController = new NoteController()
 
 noteRouter.post('/convert', noteController.convertNote)
-noteRouter.post('/save', noteController.createNote)
-noteRouter.get('/allnotes', noteController.getAllNotes)
+noteRouter.post('/', noteController.createNote)
+noteRouter.get('/', noteController.getAllNotes)
+noteRouter.get('/:id', noteController.viewNote)
 
 export default noteRouter

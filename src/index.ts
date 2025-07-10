@@ -13,8 +13,11 @@ app.get('/', (_req, res) => {
 app.use('/note', (_req, res) => {
   res.sendFile(process.cwd() + '/client/formnote.html')
 })
-app.use('/notes', (_req, res) => {
+app.use('/allnotes', (_req, res) => {
   res.sendFile(process.cwd() + '/client/getallnotes.html')
+})
+app.use('/view/:id', (_req, res) => {
+  res.sendFile(process.cwd() + '/client/viewnote.html')
 })
 app.use('/api/note', noteRouter)
 
